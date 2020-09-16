@@ -14,8 +14,8 @@ use think\Facade;
  * @method static void delay(int $delay, string $class, string $method, ...$params) 异步延迟执行代码
  * @method static void delayUseCustomQueue(int $delay, string $class, string $method, string $queue, ...$params) 异步延迟执行代码使用自定义队列
  * @method static void setLog(LoggerInterface $log) 设置日志拦截
- * @method static void queueSize($queue) 获取队列长度
- * @method static void queueName($queue) 获取队列名称
+ * @method static int queueSize($queue) 获取队列长度
+ * @method static string queueName($queue) 获取队列名称
  * @method static array queue() 获取所有队列标示
  */
 class Async extends Facade
