@@ -16,7 +16,7 @@ use think\Facade;
  * @method static void setLog(LoggerInterface $log) 设置日志拦截
  * @method static void queueSize($queue) 获取队列长度
  * @method static void queueName($queue) 获取队列名称
- * @method static void queue() 获取所有队列标示
+ * @method static array queue() 获取所有队列标示
  */
 class Async extends Facade
 {
