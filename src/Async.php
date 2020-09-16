@@ -94,6 +94,25 @@ class Async
     }
 
     /**
+     * 获取所有队列标示
+     * @return array
+     */
+    public function queue()
+    {
+        $queues = array_merge(
+            [app()->config->get('async.async_exec_method_queue')],
+            array_keys(app()->config->get('async.async_exec_method_custom_queue'))
+        );
+
+        /** @var EventGetter $getter */
+        $getter = app()->get(EventGetter::class);
+        foreach ($getter->all() as $item) {
+            $queues[] = $item->getQueue();
+        }
+        return $queues;
+    }
+
+    /**
      * 获取队列长度
      * @param $queue
      * @return int

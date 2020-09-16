@@ -83,6 +83,8 @@ Async::setLog($log);
 ## 队列信息
 ```php
 use Baiy\ThinkAsync\Facade\Async;
+// 获取所有队列标示
+Async::queue();
 // 获取队列长度
 Async::queueSize($queue);
 // 获取队列名称
