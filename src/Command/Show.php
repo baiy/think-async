@@ -3,7 +3,6 @@
 namespace Baiy\ThinkAsync\Command;
 
 use Baiy\ThinkAsync\Async;
-use Baiy\ThinkAsync\Subscribe\EventGetter;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;

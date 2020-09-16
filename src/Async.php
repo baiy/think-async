@@ -109,7 +109,7 @@ class Async
         foreach ($getter->all() as $item) {
             $queues[] = $item->getQueue();
         }
-        return $queues;
+        return array_unique($queues);
     }
 
     /**
