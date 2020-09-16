@@ -22,13 +22,18 @@ config/async.php
 use Baiy\ThinkAsync\Facade\Async;
 // 异步执行代码
 Async::exec($className,$methodName,...$params);
+// 异步执行代码使用自定义队列
+Async::execUseCustomQueue($className,$methodName,$queue,...$params);
 // 异步延迟执行代码
 Async::delay($delay,$className,$methodName,...$params);
+// 异步延迟执行代码使用自定义队列
+Async::delayUseCustomQueue($delay,$className,$methodName,$queue,...$params);
 ```
 ### 例子
 ```php
 namespace app\controller;
 
+use Baiy\ThinkAsync\Facade\Async;
 use app\BaseController;
 use think\facade\Log;
 
@@ -37,9 +42,11 @@ class Index extends BaseController
     public function index()
     {
         // 异步执行
-        \Baiy\ThinkAsync\Facade\Async::exec(self::class, 'test', 'exec');
+        Async::exec(self::class, 'test', 'exec');
+        Async::execUseCustomQueue(self::class, 'test','async_exec_method_custom', 'exec');
         // 异步延迟执行 延迟20秒
-        \Baiy\ThinkAsync\Facade\Async::delay(20, self::class, 'test', 'delay');
+        Async::delay(20, self::class, 'test', 'delay');
+        Async::delayUseCustomQueue(20, self::class, 'test','async_exec_method_custom', 'delay');
         return '';
     }
 
@@ -71,6 +78,15 @@ use Baiy\ThinkAsync\Facade\Async;
 use Psr\Log\LoggerInterface;
 /** @var LoggerInterface $log */
 Async::setLog($log);
+```
+
+## 队列信息
+```php
+use Baiy\ThinkAsync\Facade\Async;
+// 获取队列长度
+Async::queueSize($queue);
+// 获取队列名称
+Async::queueName($queue);
 ```
 
 ## 获取常驻脚本命令
