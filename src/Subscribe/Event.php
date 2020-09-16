@@ -4,7 +4,7 @@ namespace Baiy\ThinkAsync\Subscribe;
 
 class Event
 {
-    /** @var Subscriber[]  */
+    /** @var Subscriber[] */
     private $subscriber = [];
 
     /** @var string 事件名称 */
@@ -17,8 +17,8 @@ class Event
 
     public function __construct($name, $queue = "")
     {
-        $this->name = $name;
-        $this->queue = $queue ?: app()->config->get('think_async.async_subscribe_default_queue');
+        $this->name  = $name;
+        $this->queue = $queue ?: app()->config->get('async.subscribe_default_queue');
     }
 
     public function listen(string $class, string $method)

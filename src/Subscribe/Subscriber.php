@@ -2,7 +2,6 @@
 // 事件订阅者
 namespace Baiy\ThinkAsync\Subscribe;
 
-
 class Subscriber
 {
     private $class;
@@ -10,7 +9,7 @@ class Subscriber
 
     public function __construct(string $class, string $method)
     {
-        $this->class = $class;
+        $this->class  = $class;
         $this->method = $method;
     }
 

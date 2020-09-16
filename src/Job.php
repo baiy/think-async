@@ -1,5 +1,5 @@
 <?php
-// 队列执行处理
+// 队列执行
 namespace Baiy\ThinkAsync;
 
 class Job
@@ -12,20 +12,22 @@ class Job
     private function log($key, $data = "")
     {
         $log = [
-            'key' => 'async_'.$key,
             'queue' => $this->job->getQueue(),
-            'data' => $data,
+            'key'   => 'async_'.$key,
+            'data'  => $data,
         ];
-        app()->log->info(json_encode($log, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        /** @var Async $async */
+        $async = app()->get('async');
+        $async->getLog()->info(json_encode($log, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     // job入口
-    public function fire(Job $job, $data)
+    public function fire(\think\queue\Job $job, $data)
     {
         $this->job = $job;
         $this->log('start', $data);
         try {
-            $data = unserialize($data);
+            $data = Queue::unserialize($data);
             if (!isset($data['class']) || !isset($data['method']) || !isset($data['params'])) {
                 throw new \Exception("类/方法/参数配置错误");
             }
@@ -34,8 +36,8 @@ class Job
         } catch (\Exception $e) {
             $this->log('exception', [
                 'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
             ]);
         } finally {
             $this->job->delete();

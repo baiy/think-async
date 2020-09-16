@@ -1,6 +1,6 @@
 {
     "name": "baiy/think-async",
-    "description": "thinkphp 异步代码执行/异步事件订阅",
+    "description": "thinkphp 异步代码执行/异步延迟执行/异步事件订阅",
     "license": "MIT",
     "homepage": "https://github.com/baiy/think-async",
     "authors": [
@@ -10,7 +10,6 @@
         }
     ],
     "require": {
-        "topthink/framework": "^6.0",
         "topthink/think-queue": "^3.0"
     },
     "minimum-stability": "dev",
@@ -20,7 +19,7 @@
                 "Baiy\\ThinkAsync\\Service"
             ],
             "config": {
-                "think_async": "src/config.php"
+                "async": "src/config.php"
             }
         }
     },

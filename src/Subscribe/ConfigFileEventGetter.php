@@ -34,7 +34,7 @@ class ConfigFileEventGetter implements EventGetter
 
     private function initEvent()
     {
-        $config = $this->app->config->get('think_async.subscribe_event_config', []);
+        $config = $this->app->config->get('async.subscribe_event_config', []);
         $events = [];
         foreach ($config as $item) {
             $event = $this->createEvent($item);

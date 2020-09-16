@@ -17,21 +17,21 @@ class Show extends Command
     public function execute(Input $input, Output $output)
     {
         $queues = [
-            app()->config->get('think_async.async_exec_method_queue')
+            app()->config->get('async.async_exec_method_queue'),
+            app()->config->get('async.async_delay_method_queue'),
         ];
 
         /** @var EventGetter $getter */
         $getter = app()->get(EventGetter::class);
 
         foreach($getter->all() as $item){
-            if (!in_array($item->getQueue(),$queues)){
-                $queues[] = $item->getQueue();
-            }
+            $queues[] = $item->getQueue();
         }
-        foreach($queues as $queue){
-            $output->comment("=======队列:{$queue}=======");
-            $output->info("listen模式:php think queue:listen --queue {$queue}");
-            $output->info("work模式:php think queue:work --queue {$queue}");
+
+        foreach(array_unique($queues) as $queue){
+            $output->comment("======= {$queue} =======");
+            $output->highlight("listen mode:php think queue:listen --queue {$queue}");
+            $output->highlight("work mode:php think queue:work --queue {$queue}");
         }
     }
 }
