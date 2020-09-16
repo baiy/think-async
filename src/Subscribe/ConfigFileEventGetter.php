@@ -18,7 +18,7 @@ class ConfigFileEventGetter implements EventGetter
 
     public function __construct(App $app)
     {
-        $this->app = $app;
+        $this->app    = $app;
         $this->events = $this->initEvent();
     }
 
@@ -50,7 +50,7 @@ class ConfigFileEventGetter implements EventGetter
         if (!isset($config['name'])) {
             return null;
         }
-        $event = new Event($config['name'], $config['queue'] ?? "");
+        $event = new Event($config['name'], $config['title'] ?? $config['name'], $config['queue'] ?? "");
         if (isset($config['subscriber']) && is_array($config['subscriber']) && !empty($config['subscriber'])) {
             foreach ($config['subscriber'] as $subscriber) {
                 if (is_array($subscriber) && count($subscriber) > 1) {
