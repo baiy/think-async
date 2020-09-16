@@ -11,14 +11,14 @@ class Job
 
     private function log($key, $data = "")
     {
-        $log = [
+        $context = [
             'queue' => $this->job->getQueue(),
             'key'   => 'async_'.$key,
             'data'  => $data,
         ];
         /** @var Async $async */
         $async = app()->get('async');
-        $async->getLog()->info(json_encode($log, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        $async->getLog()->info('['.$context['queue'].']['.$context['key'].'] '.$context['data'], $context);
     }
 
     // job入口
@@ -34,11 +34,7 @@ class Job
             // 调用方法
             app()->invoke($data['class']."::".$data['method'], $data['params']);
         } catch (\Exception $e) {
-            $this->log('exception', [
-                'message' => $e->getMessage(),
-                'file'    => $e->getFile(),
-                'line'    => $e->getLine(),
-            ]);
+            $this->log('exception', $e->getMessage().' '.$e->getFile().':'.$e->getLine());
         } finally {
             $this->job->delete();
         }
