@@ -63,7 +63,7 @@ Async::trigger($name,...$params);
 
 默认使用`config/async.php`配置文件中`subscribe_event_config`进行配置,可使用`subscribe_event_get_class`来定制化配置来源
 
-## 扩展内部日志拦截
+## 内部日志拦截
 > 可选操作, 不设置默认使用系统`\think\Log`方法进行日志记录
 
 ```php
