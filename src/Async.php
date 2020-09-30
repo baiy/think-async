@@ -123,7 +123,7 @@ class Async
     }
 
     /**
-     * 获取队列长度
+     * 获取队列名称
      * @param $queue
      * @return string
      */
