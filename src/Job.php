@@ -33,7 +33,7 @@ class Job
             }
             // 调用方法
             app()->invoke($data['class']."::".$data['method'], $data['params']);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->log('exception', $e->getMessage().' '.$e->getFile().':'.$e->getLine());
         } finally {
             $this->job->delete();
